@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Weather_Jinan</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+		
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <style type="text/css">
+    	body{
+    		background-color: #000000;
+    		color: white;
+    		margin: 0;
+    		padding: 0;
+    		font-family: "微软雅黑";
+    		margin-top: 20px;
+    		margin-left: 5px;
+    		
+    		
+    	}
+    	.top{
+    		margin-top: 15px;
+    	}
+    	.bottom{
+    		margin-bottom: 35px;
+    	}
+    	#city{
+    		font-size: 35px;
+    	}
+    	#country{
+    		font-size: 15px;
+    		
+    	}
+    	#bigblock{
+    		width: 900px;
+    	}
+    	.middle{
+    		height: 1010px;
+    	}
+    	#address{
+    		margin-right: -105px;
+    	}
+    	#year{
+    		font-size: 17px;
+    	}
+    	#month_day{
+    		font-size: 18px;
+    	}
+    	.bottom_center_time1_1{
+    		width: 110px;   
+    		text-align: center; 		
+    	}
+    	.bottom_center_time1_2{
+    		width: 102px;
+    		text-align: center;
+    	}
+    	.bottom_center_time2{
+    		width: 100px;
+    		text-align: center;
+    	}
+    	.bottom_center_temp{
+    		width: 107px;
+    		text-align: center;
+    	}
+    	.bottom_center_wea{
+    		width: 105px;
+    		text-align: center;
+    	}
+    	.bottom_center_wind{
+    		width: 110px;
+    		text-align: center;
+    	}
+    	/*.center{
+    		width: auto;
+    		display: table;
+    		margin-left: auto;
+    		margin-right: auto;
+    		
+    	}
+    	.text-center{
+    		text-align: center;
+    	}*/
+    	/*.top1 ul{
+    		list-style: none;
+    		
+    	}
+    	.top1{
+    		list-style: none;
+    	}*/
+    	/*.top1 li{
+    		float: left;
+    	}*/
+    </style>
+  </head>
+  <body>
+	<div class="container" id="bigblock">
+		<div class="top">
+			<div class="row">
+				<div class="col-sm-4" id="top1">
+					<ul class="list-inline">
+						<li>
+							<li>
+								<div class="row" id="address">
+									<div class="col-sm-12">
+										<div id="country">中国 &nbsp;山东</div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="city">济南</div>
+									</div>
+								</div>
+							</li>
+							<li class="pull-right"> 
+								<div class="row">
+									<div class="col-sm-12">
+										<div id="year" name="year1">&nbsp;</div>
+										
+									</div>
+									<div class="col-sm-12" style="margin-top: -5px;">
+										<div id="month_day" style="margin-left: -5px;">
+											<span name="month1"></span><br>
+											<span name="time1"></span>
+										</div>
+									</div>
+									
+								</div>
+							</li>
+						</li>
+						<li>
+							<div style="font-size: 50px;" id="cunrrent_temp">&nbsp;26.3℃</div>											
+						</li>
+						<!--<li class="pull-left">
+							<li>体感温度：13℃</li>
+							<li>当前降水：0.0mm</li>
+							<li>日出时间：5:45</li>
+							<li>日落时间：5:45</li>
+						</li>-->
+					</ul>
+					<ul class="list-inline">
+						<li style="font-size: 8px;">
+							<li><p style="color: #f6b42c;">&nbsp;体感温度：23.2℃</p>
+						<!--	<li>当前降水：0.0mm</li>-->
+							<!--<li>日出时间：5:45</li>
+							<li>日落时间：5:45</li>						-->
+						</li>
+					</ul>
+					<!--<ul class="list-inline">
+						<li>
+							<li><span>当前温度</span> 25C&nbsp;</li>
+							<li><span>体感温度</span> 30C</li>
+						</li>
+					</ul>-->
+				</div>
+				<div class="col-sm-4 col-sm-offset-4" id="top2"> 
+					<ul class="list-inline">
+						<li><span style="margin-left: 15px;">白天天气</span></li>
+						<li class="pull-right"><span style="margin-right: 55px;">夜间天气</span></li>
+					</ul>
+					<ul class="list-inline">
+						<li >
+							<img class="img-rounded" src="img/Yahoo_Weather_002.png" height="70px" style="margin-right: 5px;"/>
+						</li>
+						<li class="pull-right">
+							<div style="margin-right: 45px;"><img class="img-rounded" src="img/Yahoo_Weather_014.png" height="70px" ;/></div>
+						</li>
+					</ul>
+					<ul class="list-inline" >
+						<li><p style="font-size: 13px;">最高温度:<span>&nbsp;29℃</span></p></li>
+						<li class="pull-right" ><p style="font-size: 13px; margin-right: 42px;">最低温度:<span>&nbsp;17℃</span></p></li>
+					</ul>
+					<ul class="list-inline" style="margin-top: -10px;">
+						<li style="width: 132px;">
+							<div >
+								<p style="font-size: 12px;">多云 南风 3-4级</p>
+							</div>
+							
+						</li>
+						<li>
+							<div>
+								<p style="font-size: 12px;"><span>阴 北风 3-4级</span></p>
+							</div>							
+						</li>
+					</ul>
+					<!--<ul class="list-inline" style="margin-top: -10px;">
+						<li style="margin-left: -9px;"><p style="font-size: 13px;">日出时间：5:48</p></li>
+						<li class="pull-right" style="margin-right: 28px;"><span style="font-size: 13px;">日落时间：6:45</span></li>
+					</ul>-->
+				</div>
+				<!--<div class="col-sm-4" id="top3">
+					<ul class="list-inline">
+						<li><span>当前气温</span></li>
+						<li class="pull-right" style="margin-right: 5px;"><span>体感温度：</span><font color="#0088cc">&nbsp;13℃</font></li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>当前气压</span></li>
+						<li class="pull-right">
+							<ul class="list-inline">
+								<li class="pull-left"><span>当前降水：</span></li>
+								<li class="pull-right"><font >0.0mm</font></li>
+							</ul>
+							
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>相对湿度</span></li>
+						<li><span>风向风速</span></li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>日出时间</span></li>
+						<li><span>日落时间</span></li>
+					</ul>
+					
+				</div>-->
+			</div>
+		</div>
+		<div class="middle">
+			<div class="row">
+				<div class="col-sm-12"></div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="row">
+				<div class="col-sm-2" id="day1">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_1">
+								明天（
+								<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(1)) ;
+								</script>）
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2" >									
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(1));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day2">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_1">
+								后天（<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(2)) ;
+								</script>）
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(2));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day3">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(3)) ;
+								</script>
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(3));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day4">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(4)) ;
+								</script>
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(4));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div><div class="col-sm-2" id="day5">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(5)) ;
+								</script>
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(5));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								暴风雨~雨夹雪
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								南风 3-4级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day6">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								<script>
+									function Show_Week(n){
+										var today = new Date();
+										today.setDate(today.getDate()+n)
+										var w = today.getDay();
+										if(w == 0) w = "周日";
+										if(w == 1) w = "周一";
+										if(w == 2) w = "周二";
+										if(w == 3) w = "周三";
+										if(w == 4) w = "周四";
+										if(w == 5) w = "周五";
+										if(w == 6) w = "周六";
+				//						alert(w);
+										return w;
+									}
+							    document.write(Show_Week(6)) ;
+								</script>
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									<script > 
+										 function GetDateStr(AddDayCount) 
+										{ 
+											var dd = new Date(); 
+											dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+											var y = dd.getYear(); 
+											var m = dd.getMonth()+1;//获取当前月份的日期 
+											var d = dd.getDate(); 
+											return m+"月"+d+"日"; 
+										} 
+										document.write(GetDateStr(6));
+									</script>
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="/static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/js/jquery-1.11.1.min.js.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="/static/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="/static/js/npm.js" ></script>
+    <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js" ></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js" ></script>
+    <script language="JavaScript" type="text/javascript">
+    	function Show_Year(){    	
+    		var today, year;
+    		today = new Date();
+    		year = today.getFullYear();
+//  		document.getElementById("year").innerHTML = year + "年"；
+    		var a = document.getElementsByName("year1");
+    		var div = a[0];
+    		div.innerHTML = year + "年";
+//  		alert(year);
+    		setTimeout("Show_Year();", 1000);
+    	}
+    	Show_Year();
+    	
+    	function Show_Month(){
+    		var today = new Date();
+    		var month = today.getMonth()+1;
+    		var day = today.getDate();
+    		if (month < 10) month = "0" + month;
+    		if (day < 10) day = "0" + day;    			
+    		var a = document.getElementsByName("month1");
+    		var span = a[0];
+    		span.innerHTML = month + "月" + day + "日";
+    		setTimeout("Show_Month();", 1000);
+    	}
+    	Show_Month();
+    	
+    	function Show_Time(){
+    		var today = new Date();
+    		var hour = today.getHours();
+    		if(hour < 10) hour = "0" + hour;
+    		var min = today.getMinutes();
+    		if(min < 10) min = "0" + min; 
+    		var sec = today.getSeconds();
+    		if(sec < 10) sec = "0" + sec;
+    		var a = document.getElementsByName("time1");
+    		var span = a[0];
+    		span.innerHTML = hour + ":" + min + ":" + sec;
+    		setTimeout("Show_Time();", 1000);    		
+    	}
+    	Show_Time();
+    	
+//  	function Show_Tomorrow(){
+//  		var today = new Date();
+//  		today.setDate(today.getDate() + 1);
+//  		var m = today.getMonth() + 1;
+//  		var d = today.getDate();
+//  		var a1 = document.getElementById("tom");
+//  		var span = a1[0];
+//  		span.innerHTML = m + "月" + d + "日"；
+//  		setTimeout("Show_Tomorrow();", 1000);
+//  		alert("1111");
+//  		
+//  	}
+//  	Show_Tomorrow();
+//			function GetDateStr(AddDayCount) 
+//			{ 
+//				var dd = new Date(); 
+//				dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+//				var y = dd.getYear(); 
+//				var m = dd.getMonth()+1;//获取当前月份的日期 
+//				var d = dd.getDate(); 
+//				var a = document.getElementsByName("time2");
+//  		var div = a[0];
+//  		div.innerHTML = m + "月" + d + "日"；
+//  		setTimeout("GetDateStr();", 1000);
+//				return m+"月"+d+"日"; 
+//				} 
+//				GetDateStr(1);
+//				document.write("前天："+GetDateStr(-2)); 
+//				document.write("<br />昨天："+GetDateStr(-1)); 
+//				document.write("<br />今天："+GetDateStr(0)); 
+//				document.write(GetDateStr(1)); 
+//				document.write("<br />后天："+GetDateStr(2)); 
+//				document.write("<br />大后天："+GetDateStr(20)); 
+//					function Show_Week(n){
+//						var today = new Date();
+//						today.setDate(today.getDate()+n)
+//						var w = today.getDay();
+//						if(w == 0) w = "周日";
+//						if(w == 1) w = "周一";
+//						if(w == 2) w = "周二";
+//						if(w == 3) w = "周三";
+//						if(w == 4) w = "周四";
+//						if(w == 5) w = "周五";
+//						if(w == 6) w = "周六";
+////						alert(w);
+//						return w;
+//					}
+//			    document.write(Show_Week(1)) ;
+    </script>
+    
+  </body>
+</html>

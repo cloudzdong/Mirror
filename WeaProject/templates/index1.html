@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Weather_Jinan</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    	body{
+    		background-color: #000000;
+    		color: white;
+    		margin: 0;
+    		padding: 0;
+    		font-family: "微软雅黑";
+    		margin-top: 20px;
+    		margin-left: 5px;
+    		
+    		
+    	}
+    	.top{
+    		margin-top: 15px;
+    	}
+    	.bottom{
+    		margin-bottom: 15px;
+    	}
+    	#city{
+    		font-size: 35px;
+    	}
+    	#country{
+    		font-size: 15px;
+    		
+    	}
+    	#bigblock{
+    		width: 900px;
+    	}
+    	.middle{
+    		height: 1010px;
+    	}
+    	#address{
+    		margin-right: -105px;
+    	}
+    	#year{
+    		font-size: 17px;
+    	}
+    	#month_day{
+    		font-size: 18px;
+    	}
+    	.bottom_center_time1_1{
+    		width: 110px;   
+    		text-align: center; 		
+    	}
+    	.bottom_center_time1_2{
+    		width: 102px;
+    		text-align: center;
+    	}
+    	.bottom_center_time2{
+    		width: 100px;
+    		text-align: center;
+    	}
+    	.bottom_center_temp{
+    		width: 107px;
+    		text-align: center;
+    	}
+    	.bottom_center_wea{
+    		width: 105px;
+    		text-align: center;
+    	}
+    	.bottom_center_wind{
+    		width: 110px;
+    		text-align: center;
+    	}
+    	/*.center{
+    		width: auto;
+    		display: table;
+    		margin-left: auto;
+    		margin-right: auto;
+    		
+    	}
+    	.text-center{
+    		text-align: center;
+    	}*/
+    	/*.top1 ul{
+    		list-style: none;
+    		
+    	}
+    	.top1{
+    		list-style: none;
+    	}*/
+    	/*.top1 li{
+    		float: left;
+    	}*/
+    </style>
+  </head>
+  <body>
+
+	<div class="container" id="bigblock">
+		<div class="top">
+			<div class="row">
+				<div class="col-sm-4" id="top1">
+					<ul class="list-inline">
+						<li>
+							<li>
+								<div class="row" id="address">
+									<div class="col-sm-12">
+										<div id="country">中国 &nbsp;山东</div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="city">济南</div>
+									</div>
+								</div>
+							</li>
+							<li class="pull-right"> 
+								<div class="row">
+									<div class="col-sm-12">
+										<div id="year">&nbsp;{{ Year }}年</div>
+									</div>
+									<div class="col-sm-12" style="margin-top: -5px;">
+										<div id="month_day" style="margin-left: -5px;">{{ Mouth }}月{{ Day }}日<br>{{ Hour }}</div>
+									</div>
+									
+								</div>
+							</li>
+						</li>
+						<li>
+							<div style="font-size: 50px;" id="cunrrent_temp">&nbsp;26.3℃</div>											
+						</li>
+						<!--<li class="pull-left">
+							<li>体感温度：13℃</li>
+							<li>当前降水：0.0mm</li>
+							<li>日出时间：5:45</li>
+							<li>日落时间：5:45</li>
+						</li>-->
+					</ul>
+					<ul class="list-inline">
+						<li style="font-size: 8px;">
+							<li><p style="color: #f6b42c;">&nbsp;体感温度：23.2℃</p>
+						<!--	<li>当前降水：0.0mm</li>-->
+							<!--<li>日出时间：5:45</li>
+							<li>日落时间：5:45</li>						-->
+						</li>
+					</ul>
+					<!--<ul class="list-inline">
+						<li>
+							<li><span>当前温度</span> 25C&nbsp;</li>
+							<li><span>体感温度</span> 30C</li>
+						</li>
+					</ul>-->
+				</div>
+				<div class="col-sm-4 col-sm-offset-4" id="top2"> 
+					<ul class="list-inline">
+						<li><span style="margin-left: 15px;">白天天气</span></li>
+						<li class="pull-right"><span style="margin-right: 55px;">夜间天气</span></li>
+					</ul>
+					<ul class="list-inline">
+						<li >
+							<img class="img-rounded" src="static/img/Sunny to cloudy.png" height="80px" style="margin-right: 5px;"/>
+						</li>
+						<li class="pull-right">
+							<div style="margin-right: 45px;"><img class="img-rounded" src="static/img/Sunny.png" height="80px" ;/></div>
+						</li>
+					</ul>
+					<ul class="list-inline" >
+						<li><p style="font-size: 13px;">最高温度:<span>&nbsp;29℃</span></p></li>
+						<li class="pull-right" ><p style="font-size: 13px; margin-right: 42px;">最低温度:<span>&nbsp;17℃</span></p></li>
+					</ul>
+					<ul class="list-inline" style="margin-top: -10px;">
+						<li style="width: 132px;">
+							<div >
+								<p style="font-size: 12px;">多云 南风 3-4级</p>
+							</div>
+							
+						</li>
+						<li>
+							<div>
+								<p style="font-size: 12px;"><span>阴 北风 3-4级</span></p>
+							</div>							
+						</li>
+					</ul>
+					<!--<ul class="list-inline" style="margin-top: -10px;">
+						<li style="margin-left: -9px;"><p style="font-size: 13px;">日出时间：5:48</p></li>
+						<li class="pull-right" style="margin-right: 28px;"><span style="font-size: 13px;">日落时间：6:45</span></li>
+					</ul>-->
+				</div>
+				<!--<div class="col-sm-4" id="top3">
+					<ul class="list-inline">
+						<li><span>当前气温</span></li>
+						<li class="pull-right" style="margin-right: 5px;"><span>体感温度：</span><font color="#0088cc">&nbsp;13℃</font></li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>当前气压</span></li>
+						<li class="pull-right">
+							<ul class="list-inline">
+								<li class="pull-left"><span>当前降水：</span></li>
+								<li class="pull-right"><font >0.0mm</font></li>
+							</ul>
+							
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>相对湿度</span></li>
+						<li><span>风向风速</span></li>
+					</ul>
+					<ul class="list-inline">
+						<li><span>日出时间</span></li>
+						<li><span>日落时间</span></li>
+					</ul>
+					
+				</div>-->
+			</div>
+		</div>
+		<div class="middle">
+			<div class="row">
+				<div class="col-sm-12">
+
+                </div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="row">
+				<div class="col-sm-2" id="day1">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_1">
+								明天（周一）
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									4月15日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day2">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_1">
+								后天（周二）
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									12月15日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day3">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								周三
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									2月5日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day4">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								周四
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									12月15日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div><div class="col-sm-2" id="day5">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								周五
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									4月15日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								暴风雨~雨夹雪
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								南风 3-4级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				<div class="col-sm-2" id="day6">
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time1_2">
+								周六
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_time2">	
+									4月15日
+						  </div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li><img class="img-rounded" src="static/img/Sunny to cloudy.png" height="50px" /></li
+						<li><img class="img-rounded" src="static/img/Sunny.png" height="50px" /></li
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_temp">
+								9℃~7℃
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wea">
+								多云~阴
+							</div>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<div class="bottom_center_wind">
+								无持续风向 11-12级
+							</div>
+						</li>						
+					</ul>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
